@@ -10,7 +10,10 @@ const kafkaConfig: KafkaConfig = {
     username: CONFIG.kafka.username,
     password: CONFIG.kafka.password
   },
-  logLevel: 0
+  logLevel: 0,
+  retry: {
+    retries: 10,
+  }
 }
 
 export const kafkaServer = new Kafka(kafkaConfig);

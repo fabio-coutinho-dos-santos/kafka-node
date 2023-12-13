@@ -1,99 +1,23 @@
-import {EachMessagePayload} from 'kafkajs'
 import { kafkaServer } from './kafka-config';
 import { CONFIG } from './config';
+import MyConsumer from './my-consumer';
 
-const consumer1 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
+const kafkaConsumer1 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
+const myConsumer1 = new MyConsumer('MyConsumer-1', kafkaConsumer1)
+myConsumer1.connect()
 
-consumer1.connect()
-.then(async ()=>{
-  console.log('kafka consumer 1 connected')
-  const consumer1_label = 'Consumer 1';
-  await consumer1.subscribe({topic: CONFIG.kafka.groupId, fromBeginning: true})
-  await consumer1.run({
-    eachMessage: async ({ topic, partition, message }: EachMessagePayload) => {
-      console.log({
-        value: message.value?.toString(),
-        partition: partition,
-        topic: topic
-      }, consumer1_label)
-    },
-  })
-})
+const kafkaConsumer2 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
+const myConsumer2 = new MyConsumer('MyConsumer-2', kafkaConsumer2)
+myConsumer2.connect()
 
+const kafkaConsumer3 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
+const myConsumer3 = new MyConsumer('MyConsumer-3', kafkaConsumer3)
+myConsumer3.connect()
 
-const consumer2 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
+const kafkaConsumer4 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
+const myConsumer4 = new MyConsumer('MyConsumer-4', kafkaConsumer4)
+myConsumer4.connect()
 
-consumer2.connect()
-.then(async ()=>{
-  console.log('kafka consumer 2 connected')
-  const consumer2_label = 'Consumer 2';
-  await consumer2.subscribe({topic: CONFIG.kafka.groupId, fromBeginning: true})
-  await consumer2.run({
-    eachMessage: async ({ topic, partition, message }: EachMessagePayload) => {
-      console.log({
-        value: message.value?.toString(),
-        partition: partition,
-        topic: topic
-      },consumer2_label)
-    },
-  })
-})
-
-
-const consumer3 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
-
-consumer3.connect()
-.then(async ()=>{
-  console.log('kafka consumer 3 connected')
-  const consumer3_label = 'Consumer 3';
-  await consumer3.subscribe({topic: CONFIG.kafka.groupId, fromBeginning: true})
-  await consumer3.run({
-    eachMessage: async ({ topic, partition, message }: EachMessagePayload) => {
-      console.log({
-        value: message.value?.toString(),
-        partition: partition,
-        topic: topic
-      }, consumer3_label)
-    },
-  })
-})
-
-
-const consumer4 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
-
-consumer4.connect()
-.then(async ()=>{
-  console.log('kafka consumer 4 connected')
-  const consumer4_label = 'Consumer 4';
-  await consumer4.subscribe({topic: CONFIG.kafka.groupId, fromBeginning: true})
-  await consumer4.run({
-    eachMessage: async ({ topic, partition, message }: EachMessagePayload) => {
-      console.log({
-        value: message.value?.toString(),
-        partition: partition,
-        topic: topic
-      },consumer4_label)
-    },
-  })
-})
-
-
-const consumer5 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
-
-consumer5.connect()
-.then(async ()=>{
-  console.log('kafka consumer 5 connected')
-  const consumer5_label = 'Consumer 5';
-  await consumer5.subscribe({topic: CONFIG.kafka.groupId, fromBeginning: true})
-  await consumer5.run({
-    eachMessage: async ({ topic, partition, message }: EachMessagePayload) => {
-      console.log({
-        value: message.value?.toString(),
-        partition: partition,
-        topic: topic
-      }, consumer5_label)
-    },
-  })
-})
-
-
+const kafkaConsumer5 = kafkaServer.consumer({ groupId: CONFIG.kafka.groupId});
+const myConsumer5 = new MyConsumer('MyConsumer-5', kafkaConsumer5)
+myConsumer5.connect()

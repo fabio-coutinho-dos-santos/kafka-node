@@ -15,6 +15,6 @@ producer.connect()
       ]
     })
     counter ++;
-    console.log('Message Sent')
+    console.log(`Message ${counter} Sent`)
   }, 5000)
 })
